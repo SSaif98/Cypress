@@ -1,0 +1,48 @@
+JAVASCRIPT:
+
+node :  It is an engine that will run your js file.
+node fileName.js
+
+Variable in JS is very losely coupled. Means we do not have to give the type of variable.
+var name= "Saif"
+var age=25
+
+ES5 var
+ES6 var, let, const
+var and let are almost same
+const is different from these 2.
+
+ 
+/*
+Difference between var and let and const
+ let:   We can not redeclare varibale with let keyword
+ var:   We can redeclare variable with var keyword
+ const: We can not reassign or redeclare variable with const keyword.
+
+ In var and let: We can reassign value in both type of variables.
+*/
+
+
+//if you want to see which variable if of which type.
+console.log(typeof(b))
+
+/*
+2 more datat types: null & undefined
+
+null : if we define null value then this variable of datatype NULL
+undefined: if we donot define any thing then it is undefined.
+
+*/
+
+var array2 = [1,2,3,4]
+
+console.log(array2) //[1, 2, 3, 4]
+
+array2.push(12) // add 12 at the end of array2
+array2.unshift(15) // add 15 at the end of array2
+array2.pop() // delete a value at the end of array2
+array2.indexOf(100) //Find index of any element
+array2.includes(70)  //Find if specific element present in array
+var subArray= array2.slice(2, 4)  // Create subarray from main array. slice method accpets 2 index parameters (parameter1 , parameter -1)
+console.log(subArray)
+

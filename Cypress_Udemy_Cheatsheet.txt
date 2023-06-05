@@ -1,0 +1,695 @@
+PRACTICE WEBS:
+https://rahulshettyacademy.com/angularAppdemo/
+https://rahulshettyacademy.com/angularpractice/shop
+https://rahulshettyacademy.com/AutomationPractice/
+https://rahulshettyacademy.com/seleniumPractise/#/
+https://rahulshettyacademy.com/angularpractice/
+https://example.cypress.io/commands/waiting
+
+Q: Why cypress is unique from othe automation tool?
+
+1. Frontend automation tool.
+2. Cypress automatically waits for commands and assertions before moving on. No more async hell.
+	> Cypress has a builtin 4 secs wait mechanism.
+3. Ability to test Edge Testcases by mocking server response.
+	> It has ability to automate your network request.
+	> Can also handle Api validation.
+	> Mock the reponse what ever we are getting from API.
+4. Cypress takes snapshot when you run tests.
+5. Because of it architectural design, cypress delivers fast, consistent and reliable test execution compared to other automation tool.
+6. View videos of your test execution when run from the cypress Dashboard.
+7. Cypress is built on Nodejs and comes packed as as npm module.
+8. Cypress can manupilate your DOM : selenium can't
+9. In cypress we can not switch windows by default. It do not have knowledge of child tabs.
+10. 
+
+Topics Covered in the course:
+
+1. JS Fundamentals
+2. Web Automation with Cypress.
+3. API automation with Cypress.
+4. Build Cypress Frameworks with Mocha and Cucumber.
+	> Mocha: Powerfull JS testing framework.
+	> Cucumber: Behaviour driven development approach.
+5. Intercepting network responses  and browsers with Cypress.
+6. Database testing with Cypress.
+7. Single Sign on & accessibility automation with Cypress.
+
+Cypress Architecture:
+Most testing tools operate by running outside of the browser and executing remote commands across the network but Cypress engine directly 
+opeartes inside the browser. In other words it is the browser that is executing the test code.
+	> Unit Testing
+	> Integration Testing
+	> End to End Testing
+Browser Support:
+	> Chrome
+	> Electron (one of the version of chrome (lite wait)) we do not have to install it. It already bundles with cypress.
+	> Firefox and MS Edge
+	> IE (doesn't support)
+Cypress Components:
+	> Test Runner
+	> Dashboard Service
+	
+Cypress Step-by-Step Installation:
+1. Install Node JS	
+	> Backend JS runtime envoirnment that executes JS code outside a web browser.
+	> Set path in envoirnment variable like : NODE_HOME -> C:\Program Files\nodejs
+	> In npm everyone host there packages.
+2. Download VS-Code.
+3. Create a new project with Package.json
+	> Exists at root of the project.
+	> It holds metadata relevant to the project and it is used for managing the project's dependencies.
+4. Open VS-Code, go to terminal
+	> mkdir projectName
+	> cd projectName
+	> npm -i init
+		> It will create readymade package.json file
+	> If we write this : npm install cypress
+		> then npm will see in package.json file which version to install if it doesn't find any thing then it will go to npm repo and see
+			what version is available there.
+	> npm install cypress --save-dev
+		> it will create an entry in package.json after installing cypress.
+	> node_modules/.bin/cypress open (to open the test runner) or  npx cypress open (to open the test runner)
+	> To direct run the test case then : node_modules/.bin/cypress run   or   npx cypress open
+		> In this all the specs will run.
+
+	> mkdir projectName
+	> cd projectName
+	> npm -i init
+	> npm install cypress   or  npm install cypress --save-dev
+	> npx cypress open
+	> Create integration folder as in previous version it was recommended.
+
+Spec Pattern:
+	> In cypress.config.js file we can define a specPattern that how we will create our spec
+		> specPattern: 'cypress/integration/examples/*.js'
+
+Javascript Testing Frameworks:
+1. Mocha
+2. Jasmine
+
+Cypress builtin comes with Mocha Testing Framework.
+It uses : 
+	describe > for Test Suit
+		it 	 > for Test 
+		it 	 > for Test Case
+Mean 'describe' will have multiple 'it' blocks in it.
+
+describe:
+	It will takes two arguments	first is "Desciption of suite" and second is a function that will wrape all 'it' blocks.
+		> describe('Describe the suite', ()=>{
+		
+		})
+
+"cy" is a global command which will help in invoking any cypress command. It's like a driver in selenium.
+We do not have to create any obj of "cy"
+
+RUN A SPECIFIC SPEC WITHOUT OPENING TEST RUNNER:
+
+npx cypress run --spec "cypress/integration/examples/test2.js"
+
+RUN A ALL SPECS WITHOUT OPENING TEST RUNNER:
+
+npx cypress run  
+
+npx cypress run  --headed  (Browser will invoke and you can see the test execution and then it will auto close)
+
+npx cypress run  --browser chrome/edge/firefox  (Test will be executed in required browser in headless mode.)
+
+
+TWO MODES OF RUNNING TEST CASE:
+Mode#1 
+	Head Mode: Means browser will open and run the test & you will see the execution.
+
+Mode#2
+	Headless Mode: Means browser will open in backnd and run the test.
+					default browser is electron
+
+
+CYPRESS PROJECT FRAMEWORK STRUCTURE:
+1. fixtures: Reponsible to store test data.
+2. integration: We will write test case in this folder.
+3. plugins: Kind of plugins. to handle cypress events.  We can write code what to do before and after the event happen.
+4. support: can write here customize commands and reuseable methods.
+		The test case will by default scans the support folder we do not have to import it in test case file.
+		On the other hand if we create a separate folder for reuseable methods we have to import them in test case file.
+		Re-useable methods are placed under :  Support/Command.js
+5. node_modules: It will come when we do npm install cypress. Heart of the project.
+6. cypress.config.js: Auto generates when we first time open cypress test runner.previously it was cypress.json
+		Congiguration file for entire framework.
+		We can see all configurations from Test Runner/Settings/Project Settings
+
+https://rahulshettyacademy.com/seleniumPractise/#/
+https://rahulshettyacademy.com/practice-project
+
+
+SELECTORS:
+Cypress only supports "CSS Selector"
+
+ID: 
+	1- #idName
+	2- tagname#idName
+Class: 
+	1- .className
+	2- tagname.className 
+Attribute:
+	1- tagname[attribute='value'] =>    cy.get('input[type="search"]')
+Parent Traversing:
+	1- form input
+	2- cy.get('.products .product').should('have.length',4)   //parent child traversing using CSS Selector
+	3- cy.get('.products').find('.product').should('have.length',4)   //parent child traversing using find keyword
+
+Child Traversing:
+.table-display tbody tr td:nth-child(2)
+
+Sibiling:
+cy.get().next()
+
+
+
+INBUILT SELECTOR IN TEST RUNNER:
+Selectors Playground
+
+ cy.get() > method that will get the locator present in your webpage.
+
+In selenium "get" is used to hit the url in browser, method that will get the locator present in your webpage.
+
+ASSERTION CHAI:
+
+to check property(comparision) assertion we will be using "have":
+cy.get('.product').should('have.length',4) (should is chai assertion)
+
+to check sub string assertion we will be using "include":
+.should('include','subString')
+
+to check equality assertion we will be using "eq":
+.should('eq','any string')
+ 
+//Asserting logo
+cy.get('.brand').should('have.text','GREENKART')
+
+to check behavioural assertion we will be using "be":
+cy.get('#checkBoxOption1')
+            .check()
+            .should('be.checked')
+            .should('have.value','option1')  or .and('have.value','option1')
+To concatinate 2 assertions we uses "and"
+
+cy.get('#checkBoxOption1')
+            .uncheck()
+            .should('not.be.checked')
+
+.should('include','academy')
+.should('eq','https://www.rahulshettyacademy.com/')
+
+Compare to strings/number:
+expect(str).to.equal('string')
+
+To check the attribute value:
+.should('have.attr','minlength','2')
+
+
+WAITS:
+cy.wait(2000)
+
+Handling Invisible Elements:
+  cy.get('.product:visible').should('have.length',4)
+  ":visible" is used in jquery selector
+
+
+ITERATION ON EACH ELEMENT:
+ cy.get('.products').find('.product').each(($el,index,$list)=>{
+
+        const veg= $el.find('h4.product-name').text()
+        if(veg.includes('Strawberry')){
+            $el.find('button').click()
+        }
+    })
+
+Cypress is asynchronus in nature as it is JS framework it do not esure you the sequence of execution but internallly cypress has deal with the asynchronus nature.
+
+
+Asynchronus:
+	It means all the steps wil hit the server at once.
+	
+Synchronus:
+	It means every steps wil hit in sequence manner.
+
+Promise Stages:
+Resolved
+Rejected
+Pending
+
+Every asynchronus process return us a promise with one of the above states.
+.then()
+
+    cy.get('.brand').then((logoText)=>{
+        cy.log(logoText.text())
+    })
+  cy.get(locator).then(function(argument)=>{
+        cy.log(argument.text())
+    })
+
+	
+We can not write it like this:
+  const logoText=  cy.get('.brand')
+        cy.log(logoText.text())
+because logoText is a veriable it is not a cypress command it will not understand the promise.
+Non cypress commands can not resolve promise by themselves. We need to manually resolve it by then()
+
+
+
+Text() is not a cypress command it is a jquery method.
+Cypress do not have any method to grab the text
+
+ALISING THE WEBELMENT:
+
+cy.get('.products').as('products')
+
+how to use it:
+
+cy.get('@products')
+
+
+console.log('aa')	> It will print in web browser's developer tool console.
+cy.log('aa')		> It will print in Test Runner.
+
+console.log('a') > In this case this will imediately prints in console as it is js feature and it is asynchronus if we want to handle it in cypress that it will log on our choice then we have to resolve the promise:
+
+like:
+
+cy.get('.search').type('cucumber').then(()=>{
+	console.log('a')
+})
+
+CHECKBOXES:
+ //Check multiple(all) checkboxes
+        //cy.get('input[type="checkbox"]').check()
+
+//Check multiple(custom) checkbox
+		//cy.get('input[type="checkbox"]').check(['option1','option3'])
+
+//Check single checkbox
+cy.get('#checkBoxOption1')
+            .check()
+            .should('be.checked')
+            .should('have.value','option1')  or .and('have.value','option1')
+
+SELECT:
+Select can be done by 'value' or 'name'
+cy.get('select').select('option2')
+            .should('have.value','option2')
+			
+
+ALERTS:
+cypress by default has ability to auto accept  the alerts.
+
+EVENTS:
+Cypress has ability to handle browser event.
+window:alert
+
+cy.on('window:alert', (str)=>{
+            expect(str).to.equal('Hello Saif, share this practice page and share your knowledge')
+        })
+"on" accept 2 arguments "event fire" and second one is what you got from it.
+in above case the event is "window:alert" and 2nd argument is "string"
+
+
+
+CHILD TABS:
+Cypress do not support child tabs. like if a anchor tag has href and target attribute on clicking it will open the href address in new window. cypress do not support it.
+Workaround is we need to use jquery fuctions and remove the target attribute then it will open in same window.
+cy.get('#val').invoke('removeAttr','atribute name').click();
+
+MOUSE HOVER:
+Cypress do not support mouse hover event we have to use jquery for this.
+"show" method of jquery should be applied on imediate parent
+cy.get('.mouse-hover-content').invoke('show')
+        cy.contains('Top').click()
+        cy.url().should('include','top')
+
+FORCE CLICK:		
+ cy.contains('Top').click({force : true})
+        cy.url().should('include','top')
+
+NAVIGATION IN CYPRESS:
+       cy.go('back')
+       cy.go('forward')
+       cy.reload()
+
+VALIDATE CURRENT URL:
+cy.url().should('include','academy')
+cy.url().should('eq','https://www.rahulshettyacademy.com/')
+
+
+INDEX:
+.eq()
+It recieves a index only.
+
+JQUERY:
+To use jquery in cypress we have to use .invoke method to invoke jquery methods like:
+cy.get('www.google.com').invoke('removeAttr', 'target')
+
+
+TO GET ATTRIBUTE VALUE IN JQUERY:
+/*   cy.get('#opentab').then((el)=>{
+         var link=   el.attr('href')
+         cy.log(link)
+         })
+
+         */
+cy.get('#opentab').invoke('attr','href').then((str)=>{
+     cy.visit(str)
+	 
+HTML document on top of a HTML Document is frame.
+
+FRAMES:
+import pkg:
+npm instal -D cypress-iframe
+/// <reference types="cypress-iframe"/>
+To work in frame we have to load the frame first:
+cy.frameLoaded('')
+
+Now if you want to acces any element in frame then we have to say:
+cy.iframe().find('')
+
+
+***************************************************************** FRAMEWORK *********************************************************
+1. Setting up test Hooks
+2. Data Driven Testing with Fixtures.
+3. Building custom cypress commands
+4. Parameterize test with Mulitiple Test Dataset.
+5. Understand Test Debugging
+6. Build Page object design pattern for objects.
+7. Configure changes in cypress.json
+8. Screenshot and vedio recording for test.
+9. Exploring cypress dashboard
+10. Understand envoirnmental variable of cypress.
+11. Generate reports for test execution
+12. Integrate cypress tests with jenkins CI
+
+CYPRESS HOOKS:
+Hooks are taken from mocha framework.
+It is like annotation in selenium:
+
+describe('Hooks', () => {
+  before(() => {
+    // runs once before all tests in the block
+  })
+
+  beforeEach(() => {
+    // runs before each test in the block
+  })
+
+  afterEach(() => {
+    // runs after each test in the block
+  })
+
+  after(() => {
+    // runs once after all tests in the block
+  })
+})
+
+
+Fixture:
+In this folder we provide test data. in .json file.
+
+
+We have to resolve the promise to access the value that fixtures returns.
+
+  before(function(){
+        // runs once before all tests in the block
+        cy.fixture('example').then(function(data){
+            this.data= data
+        })
+    })
+In the above code you can see that we have to resolve the promise and also declare the variable data as global variable like : this.data=data as we need to it any where else in the sheet.
+how to access data: this.data.name
+
+SUPPORT FOLDER:
+
+In this folder there is a file command.js in this file we can write custom commands(reuseable methods
+
+Cypress.Commands.add('selectProduct', (productName) => { 
+    cy.get('.card-title a').each(($el, index, $list)=>{
+        /*  const brandName=   $el.text()
+          if(brandName.includes(this.data.brandS)){
+             cy.get('.card-footer button').eq(index).click()
+          }
+          */
+          if($el.text().includes(productName)){
+             cy.get('.card-footer button').eq(index).click()
+          }
+     })
+
+Parametrizing the test data from json file using each command:
+
+"productName": ["Samsung", Blackberry]
+
+this.data.productName.forEach(function(element){
+            cy.selectProduct(element)
+        })
+
+DEBUGGING:
+cy.pause() > it will pause the test
+
+CYPRESS.CONFIG.JS:
+In this file we can override the default commands like:
+defaultCommandTimeOut : 6000,  //changing global timeout
+
+TIMOUTS:
+Spec level timeout:  Cypress.config('defaultCommandTimeout',8000)
+
+
+ENVOIRNMENTAL VARIABLE:
+some values are used globally so we can save it one time in envoirnmental variable to use any where.
+
+Save envoirnmental variable in cyprress.config.js file like:
+env : 
+  {
+   url: "https://rahulshettyacademy.com"
+  }, 
+  
+ How to access it:
+ Cypress.env('') is the way
+cy.visit(Cypress.env('url')+'/angularpractice/')
+
+When using env variable we can run the particular spec on different url which is good when you are testing  UAT
+npx cypress run --spec "cypress/integration/examples/test2.js" --headed --browser chrome --env url="https://rahulshettyacademy.com"
+
+
+Benefits of Integrating your framework with Cypress Cloud Dashboard:
+1. Can see execution of your test on cloud with very detailed reports, Videos (Success/Failure), Logs, Screenshot
+Login from Cypress Test Runner
+Create a Project
+Now get the project id and paste it in cyprress.config.js file
+
+How your localy cypress know it should connect to your cloud account using Cypress_record_key
+
+npx cypress run --record --key d9f7f83e-bbca-448e-a661-01ec0fe79063
+
+suppose we are running a case and it fail for any reason but you want it to run again for that we can add in cypress.config.js file
+retries: {
+runMode: 1,
+}
+
+Will run all cases in headed mode and store all the reports results in cypress cloud.
+npx cypress run --record --key d9f7f83e-bbca-448e-a661-01ec0fe79063 --spec "cypress/integration/examples/*.js"  --headed  
+
+SCRIPTS:
+In pkg.json we can give our commands that are used frequently to run the test in Scripts tag:
+like: 
+
+"allCases" : "cypress run"
+
+how to run it: npm run allCases.
+
+"allCasesHeadless" : "cypress run",
+"allCasesHeaded_in_cypressCloud" : "npm run allCasesHeadless -- --record --key d9f7f83e-bbca-448e-a661-01ec0fe79063 --spec 'cypress//integration///examples///*.js'  --headed  "
+In the above command you can see that we can also reuse scripts in other scripts.    
+
+
+--parallel in JINKINS is used if more then one machine is configured in JINKINS
+
+
+--reporter mochawesome for Reports in local
+
+DOWNLOAD JINKINS:
+To open java or war file:
+java -jar
+
+Jenkin Password: abf86eb010db408d9e2eeb2ff06e397a
+C:\Users\user\.jenkins\secrets\initialAdminPassword
+
+
+D:\Cypress Udemy\Jenkins>java -jar jenkins.war -httpPort=9090
+hit url: http://localhost:8080/
+
+Now create a new project.
+After creation in general tab:
+Set the "use custom workspace"
+Then make the build parameterized
+for this first we have to check "This project is parameterized" check then select "choices"
+Inside it we have to give the parameters that we have set in pkg.json in scripts 
+then save it.
+Now set the build step as Execute Shell
+set npm run "$scripts"
+
+Java(TM) SE Development Kit 18.0.1.1
+
+
+CUCUMBER BDD(Behaviour Driven Development):
+
+CUCUMBER:
+
+1. gherkin syntax
+2. Binding the code with sentence
+3. BBD Framowrk is supported by a tool Cucumber
+
+Scenario	: Opening a google network page
+	Given	: I open Ecomerce page
+	When	: I add items to cart
+	And		: Validate the total price
+	Then	: Select the country and submit
+
+Describing the behaviour and based on this behaviour we are Driving our development.
+
+StepDefinition(File):
+How do i link up?
+Depends on programming language
+	- Cypress is on JS
+
+By default cypress do not support cucumber related run we have to install the pkg
+
+cypress cucumber preprocessor develop by badedall
+next is to give get the info in cypress.config.js
+
+npm install @badeball/cypress-cucumber-preprocessor
+
+So basically you installed a new plug in, right?
+But whenever you are running your framework, you have to make sure that you register that plugin in
+this setup node events function defined here.
+
+We are seeing that there is one function called setup node events.
+What is it's responsible for?
+So basically this function helps you to load all the plugins before you start running your test.
+So we now have an external plugin called Cucumber.
+Right.
+We have to make sure that plugin details are given here so that it loads them before it runs the framework.
+
+Get the Setup node event from this repo:
+https://github.com/badeball/cypress-cucumber-preprocessor/blob/master/examples/browserify-cjs/cypress.config.js
+
+const preprocessor = require("@badeball/cypress-cucumber-preprocessor");
+const browserify = require("@badeball/cypress-cucumber-preprocessor/browserify");
+
+
+Get the dependency for your frame work:
+https://github.com/badeball/cypress-cucumber-preprocessor/blob/master/examples/browserify-cjs/package.json
+    "@cypress/browserify-preprocessor": "latest",  //JS compiler engine
+	
+It will only pick .feature file :
+specPattern: 'cypress/integration/examples/BDD/*.feature'
+
+Intall vs code cucumber extension
+
+FEATURE FILE:
+A feature file may have multiple scenarios. Its like a test suite have multiple test cases. 
+
+import { Given, When, Then } from "cypress-cucumber-preprocessor/steps";
+
+
+npm install --save-dev @cucumber/cucumber
+
+
+MOCHAWESOME:
+npm i --save-dev cypress-mochawesome-reporter
+npm install mochawesome -D
+npm install mochawesome-merge --save-dev
+
+
+DATA DRIVEN TESTING USING CUCUMBER:
+
+
+TAGS:
+Run specific Tests :
+npx cypress run --env tags="@Regression" --headed
+
+
+REPORTING using cucumber preprocessor:
+HTML file can read a json report to create an html report
+
+add this in pkg.json:
+
+"cypress-cucumber-preprocessor": {
+    "json": {
+      "enabled": true,
+      "output": "cypress/cucumberReports/results.json"
+    }
+  },
+
+download this  Cucumber Standalone JSON Formatter place it in project after remaining it.
+
+
+npm install multiple-cucumber-html-reporter --save
+npm install multiple-cucumber-html-reporter --save-dev
+
+file will there save the code in project level : cucumber-html-report.js
+
+node cucumber-html-report.js
+
+
+CYPRESS INTERCEPT:
+Intercept method manage the behaviour of HTTP request 
+
+1. Modify real http reponses, changing the body, headers, or http status code before they are recieved by the browser.
+2. Modify http request body, headers , and URL before it is sent to the destination server.
+3. Help us to perform integration testing between  UI and Back-end service. 
+
+So one common syntax where it always comes as handy is a request object response object.
+So here you have to pass the request, what you want to intercept and and the response object, you want to give the response, how do you want to mock it?
+cy.intercept({requestobject}, {responseobject})
+
+both takes JSON objects 
+
+TO Parse CSV File add dependency in pkg.json:
+
+"neat-csv": "5.1.0"
+add this in your file : const neatCSV= require("neat-csv")
+ cy.readFile(Cypress.config("fileServerFolder")+"/cypress/downloads/order-invoice_atiya.csv")// it will get the text from csv file
+    .then(async(text)=>{
+        const csv= await neatCSV(text)
+        cy.log(csv)
+       const actualProductCSV= csv[0] ["Product Name"]
+       expect(pN).to.equal(actualProductCSV)
+    })
+READ EXCEL FILE:
+https://www.npmjs.com/package/convert-excel-to-json
+
+
+By default MYSQL do not supported by Cypress we have to install a plugin:
+npm install --save-dev cypress-sql-server
+We have to register the plugin in cypress.config.js file in "setupNodeEvents" method 
+
+const sqlServer = require('cypress-sql-server');
+
+ 
+config.db = {
+    userName: "ssa",
+    password: "Syedsaifali1234.",
+    server: "ssadbdemo.database.windows.net",
+    options: {
+        database: "syedsaifaliacademy",
+        encrypt: true,
+        rowCollectionOnRequestCompletion : true
+    }
+}
+tasks = sqlServer.loadDBPlugin(config.db);
+  on('task', tasks);
+ 
+
+Place:
+import sqlServer from 'cypress-sql-server';
+sqlServer.loadDBCommands();
+
+in Support/e2e.js

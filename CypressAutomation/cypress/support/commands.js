@@ -1,0 +1,55 @@
+// ***********************************************
+// This example commands.js shows you how to
+// create various custom commands and overwrite
+// existing commands.
+//
+// For more comprehensive examples of custom
+// commands please read more here:
+// https://on.cypress.io/custom-commands
+// ***********************************************
+//
+//
+// -- This is a parent command --
+// Cypress.Commands.add('login', (email, password) => { ... })
+//
+//
+// -- This is a child command --
+// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
+//
+//
+// -- This is a dual command --
+// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
+//
+//
+// -- This will overwrite an existing command --
+// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('selectProduct', (productName) => { 
+    cy.get('.card-title a').each(($el, index, $list)=>{
+        /*  const brandName=   $el.text()
+          if(brandName.includes(this.data.brandS)){
+             cy.get('.card-footer button').eq(index).click()
+          }
+          */
+          if($el.text().includes(productName)){
+             cy.get('.card-footer button').eq(index).click()
+          }
+     })
+
+ })
+ Cypress.Commands.add("LoginAPI",function(){
+   //to make an API call
+   cy.request('POST',"https://rahulshettyacademy.com/api/ecom/auth/login", 
+   {"userEmail":"atiya@gmail.com","userPassword":"Saif1234."}).
+   then(function(resonse){
+      expect(resonse.status).to.eq(200)
+      Cypress.env('token',resonse.body.token);
+
+   })
+ })
+
+
+
+ 
+
+

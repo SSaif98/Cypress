@@ -1,0 +1,98 @@
+[
+  {
+    "description": "    application regression",
+    "elements": [
+      {
+        "description": "",
+        "id": "end-to-end-ecomerce-validation;filling-the-form-to-shop",
+        "keyword": "Scenario",
+        "line": 12,
+        "name": "Filling the form to shop",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 13,
+            "name": "I open Ecomerce page",
+            "match": {
+              "location": "not available:0"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1281000000
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "name",
+                      "gender"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Bob",
+                      "Male"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "When ",
+            "line": 14,
+            "name": "I fill the form detail",
+            "match": {
+              "location": "not available:0"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 584000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 17,
+            "name": "validate the from behaviour",
+            "match": {
+              "location": "not available:0"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 413000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 18,
+            "name": "select the shop page",
+            "match": {
+              "location": "not available:0"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2588000000
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@Smoke",
+            "line": 11
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "end-to-end-ecomerce-validation",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "End to End Ecomerce Validation",
+    "tags": [],
+    "uri": "cypress\\integration\\examples\\BDD\\ecomerce.feature"
+  }
+]
